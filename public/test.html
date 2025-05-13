@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImmoSolution - Toutes les propriétés</title>
+    <link rel="stylesheet" href="../src/output.css">
+    <style>
+        .property-card {
+            transition: transform 0.3s ease;
+        }
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white py-4 px-6 shadow">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="mr-2">
+                    <svg class="w-10 h-10" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="30" fill="#FCD34D" />
+                        <path d="M25,70 L75,70 L50,30 Z" fill="#3B82F6" />
+                    </svg>
+                </div>
+                <div class="text-xl font-bold text-gray-800">ImmoSolution</div>
+            </div>
+            <nav class="hidden md:flex justify-center items-center space-x-6">
+                <a href="#" class="font-medium text-gray-800">Accueil</a>
+                <a href="#" class="font-medium text-gray-800">Propriétés</a>
+                <a href="#" class="font-medium text-gray-800">Témoignages</a>
+                <a href="#" class="font-medium text-gray-800">Contact</a>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Connexion</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-32 px-4">
+        <!-- Selected Properties Header -->
+        <div class="mb-6">
+            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm">Propriétés sélectionnées</span>
+        </div>
+
+        <h1 class="text-3xl font-bold mb-2">Toutes les propriétés</h1>
+        <p class="text-gray-600 mb-8">Trouvez la maison parfaite pour vous et votre famille. Utilisez les filtres ci-dessous pour affiner votre recherche.</p>
+
+        <!-- Filters Section -->
+        <div class="bg-cyan-200 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Filtres</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+                <!-- Property Type Filter -->
+                <div>
+                    <label class="block text-gray-800 mb-2">Type de Propriétés</label>
+                    <div class="relative">
+                        <select class="w-full bg-white border border-gray-300 rounded py-2 px-4 appearance-none">
+                            <option>Tous les types</option>
+                            <option>Appartement</option>
+                            <option>Maison</option>
+                            <option>Villa</option>
+                            <option>Terrains</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- City Filter -->
+                <div>
+                    <label class="block text-gray-800 mb-2">Villes</label>
+                    <div class="relative">
+                        <select class="w-full bg-white border border-gray-300 rounded py-2 px-4 appearance-none text-gray-400">
+                            <option>- Choisissez une ville -</option>
+                            <option>Yaoundé</option>
+                            <option>Douala</option>
+                            <option>Bafoussam</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Filter -->
+                <div>
+                    <label class="block text-gray-800 mb-2">Budget</label>
+                    <input type="text" placeholder="entrez votre budget" class="w-full bg-white border border-gray-300 rounded py-2 px-4">
+                </div>
+            </div>
+
+            <!-- Available Properties Checkbox -->
+            <div class="flex items-center mb-6">
+                <input type="checkbox" id="available" class="h-4 w-4 text-blue-600 rounded">
+                <label for="available" class="ml-2 text-sm text-gray-800">Afficher uniquement les propriétés disponibles</label>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded">
+                    Appliquer les filtres
+                </button>
+                <button class="bg-white hover:bg-gray-100 text-gray-800 font-medium py-2 px-6 rounded border border-gray-300">
+                    Rénitialiser les filtre
+                </button>
+            </div>
+        </div>
+
+        <!-- Properties Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Property Card 1 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 2 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-blue-500 text-white px-2 py-1 text-sm rounded">Vente</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne en vente</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 3 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 4 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 5 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-blue-500 text-white px-2 py-1 text-sm rounded">Vente</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne en vente</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 6 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 7 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 8 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-blue-500 text-white px-2 py-1 text-sm rounded">Vente</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne en vente</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Card 9 -->
+            <div class="bg-white rounded-lg overflow-hidden shadow property-card">
+                <div class="relative">
+                    <img src="../public/img/g7.jpg" alt="Appartement" class="w-full h-48 object-cover">
+                    <span class="absolute top-4 left-4 bg-green-500 text-white px-2 py-1 text-sm rounded">Location</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between">
+                        <h3 class="font-bold text-lg">Appartement Moderne à Louer</h3>
+                        <div class="text-right">
+                            <p class="font-bold text-blue-500">90.000</p>
+                            <p class="text-sm text-blue-500">FCFA/ mois</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center mt-2 text-sm text-gray-600">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span>Quartier bastos, Yaoundé, Cameroun</span>
+                    </div>
+                    <div class="flex justify-between mt-4 border-t pt-4">
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>2 chambres, salon, cuisine, douche</span>
+                        </div>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span>70 m²</span>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-xs text-gray-500">Disponible</span>
+                        <a href="#" class="float-right text-blue-500 text-sm hover:underline">Voir les Détails</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center items-center mt-8">
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white hover:bg-gray-100">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+            </a>
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded-md">1</a>
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white hover:bg-gray-100">2</a>
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white hover:bg-gray-100">3</a>
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white hover:bg-gray-100">4</a>
+            <a href="#" class="mx-1 flex items-center justify-center w-8 h-8 border border-gray-300 rounded-md bg-white hover:bg-gray-100">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip></path>
+                </svg>
+            </a>
+        </div>
+    </main>
+    <footer class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <!-- Logo and Info -->
+                <div class="mb-8 md:mb-0 md:w-1/4">
+                    <div class="flex items-center mb-4">
+                        <div class="mr-2">
+                            <svg class="w-10 h-10" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="30" fill="#FCD34D" />
+                                <path d="M25,70 L75,70 L50,30 Z" fill="#3B82F6" />
+                            </svg>
+                        </div>
+                        <div class="text-xl font-bold text-green-500">ImmoSolution</div>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">
+                        La plateforme qui simplifie la gestion immobilière au Cameroun. Notre mission est de connecter propriétaires et locataires.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-600 hover:text-blue-800">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-blue-400 hover:text-blue-600">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-pink-600 hover:text-pink-800">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Services -->
+                <div class="mb-8 md:mb-0">
+                    <h3 class="font-bold text-gray-800 mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Location</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Gestion Immobilière</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Vente</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Conseil</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Company -->
+                <div class="mb-8 md:mb-0">
+                    <h3 class="font-bold text-gray-800 mb-4">Entreprise</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">À propos</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Témoignages</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-blue-500">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Payment Methods -->
+                <div>
+                    <h3 class="font-bold text-gray-800 mb-4">Moyens de paiement</h3>
+                    <div class="space-y-2">
+                        <div class="bg-orange-500 text-white px-3 py-1 rounded text-sm inline-block">Orange money</div>
+                        <div class="bg-yellow-500 text-white px-3 py-1 rounded text-sm block">Mobile money</div>
+                        <div class="bg-blue-500 text-white px-3 py-1 rounded text-sm inline-block">Espèces</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t pt-6 text-center text-gray-600 text-sm">
+                © 2023 ImmoSolution tous droits réservés
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+<!-- End of HTML Document -->
